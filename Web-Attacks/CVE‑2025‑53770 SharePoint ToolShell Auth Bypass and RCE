@@ -1,0 +1,101 @@
+---SECURITY INCIDENT REPORT---
+
+Incident ID: 320
+Reported By: Braulio Garcia - Tier 1 SOC Analyst 
+Date: February 18, 2026
+Time Detected: 13:07 PST
+Severity: High
+Status: Escalated to Tier 2
+Attack Technique: Remote Code Execution (RCE)
+
+
+1. Executive Summary
+  
+  A CVE-2025-53770 (SharePoint ToolShell RCE) alert was triggered at 13:07 PM involving inbound HTTP traffic from a suspicious external IP 107.191.58.76. Web logs showed a suspicious POST request to a sensitive endpoint with a large payload.
+
+Threat intelligence lookup identified the source IP as associated with CVE-2025-53770 exploitation activity.
+
+Endpoint investigation confirmed successful remote code execution and evidence of post-exploitation activity including, web shell deployment and successful execution of obsfucated PowerShell commands.
+
+Based on the observed IOC's and confirmed execution of malicious activity, it was concluded that the web server was compromised. 
+
+Incident escalated to Tier 2. Immediate containment of the affected server was recommended.
+
+
+2. Detection Summary
+
+    Alert Source: SIEM Correlation Rule - Web Attack Detection
+    Rule Triggered: CVE‑225‑53770 SharePoint ToolShell Auth Bypass and RCE
+    Initial Indicator: Inbound HTTP POST to '/_layouts/15/ToolPane.aspx?DisplayMode=Edit'
+
+3. Timeline of Events 
+
+  Time (PST)           Event
+  13:07                SIEM triggered an RCE detection alert 
+  13:08                Web logs inspected, finding POST request with large payload from an unusual host IP 
+  13:11                Email Security tool checked, ensuring the request was not part of an authorized penetration test by the organization
+  13:12                Threat Intel check verified the host was tagged with prior CVE‑2025‑53770 attempts
+  13:15                Host's endpoint command history was inspected revealing successful execution of malicious payload 
+  13:17                Incident escalated to Tier 2 
+
+4. Detailed Findings 
+
+  4.1 HTTP Request
+Source IP: 107.191.58.76.
+
+- POST Request to: /_layouts/15/ToolPane.aspx?DisplayMode=Edit
+- Large payload of 7699 indicating potential exploit attempt
+- Host was a raw IP instead of domain - indicating an external IP 
+- Referer was the web app's sign out page - inconsistent navigation flow with expected user behavior 
+
+4.2 Threat Intel 
+
+- Source IP was tagged with CVE‑2025‑53770 in correlation to SharePoint remote execution exploitation
+
+4.3 Endpoint Security
+Endpoint command history logs found multiple abornmalities:
+
+- PowerShell Command: Accessed MachineKeySection indicating attempt to retrieve cryptographic configuration material.
+- Command Prompt Execution: Created malicious ASPX file spinstall0.aspx in the SharePoint layouts directory.
+- C# Compilation: Used csc.exe to compile a payload executable 
+- Encoded PowerShell Execution: Obsfucated script designed to extract and display machine configuration keys.
+
+5. Analysis and Interpretation
+
+Confirmed IOC's:
+
+- Unusual inbound HTTP traffic from external IP 
+- Senstitive application edit mode endpoint was targeted  
+- Succesful execution of commands via terminal unlikely to be present in normal operation
+- Creation of web shell file 
+- Compilation of executable payload
+- Encoded PowerShell to access sensitive config data
+
+Assessment:
+
+The chain of events represented a confirmed exploitation of a web application vulnerability leading to unauthorized code execution. 
+Post-exploitation processes showed clear malicious intent and a successful compromise of the affected host.
+
+6. Impact Assesment 
+
+Confidentiality: Compromised - access to sensitive config data was bypassed
+Integrity: Compromised - web app files were modified and malicious code was deployed
+Availibility: Potential impact - pending further investigation
+Risk: Critical - attacker gained access, likely able to maintain persistence 
+
+7. Recommended Actions
+
+Immediate: 
+
+- Containment of affected server
+- Rotate cryptographic keys 
+- Block the identified malicious source IP 
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Prepared By: 
+Tier 1 SOC Analyst: Braulio Garcia
+
+  
+
+  
