@@ -11,5 +11,48 @@ Attack Technique: Password Brute-force Attempt
 
 1. Executive Summary
 
+  On February 13, a VPN connection attempt from an unauthorized country was detected. After investigation, it was found that there were mulitiple failed login attemtps as well as recon behavior targeting the VPN gateway.
+  No sign of successful compromise was detected. The event was classifed as an attemtped intrusion.
+
+
+2. Timeline
+
+  Time (PST)        Event
+  02:04 AM          Failed OTP Attempt #1
+  02:05 AM          Failed OTP Attempt #2
+  02:06 AM          Failed OTP Attempt #3
+
+
+3. Technical Analysis
+
+  Confirmed IOC's:
+  - Source address: 113.161.158.12 != the targeted host's IP address, indicating source address was external and spoofing the target hostname
+  - Time of incident was 02:04 AM (PST), outside of regualar business hours
+  - Threat intel analysis revealed that the source IP had been associated with brute force attacks before 
+  - Multiple OTP authentication attempts in the span of a couple minutes, indicitive of brute force attempt 
+  - Port probing detected 
+
+  Assesment: 
+  The source IP had behavior consistent with that of recon. Many attempted connections were made to a variety of different destination ports, indicating port probing took place.
+  There were many authentication attempts from the source IP, but no signs of successful compromise or persistence were detected. 
+
+
+4. Impact
+
+  No internal systems were compromised. No data exposure occurred. Business operations were not impacted.
+
+
+5. Remediation 
+
+  - Block malicious IP 
+  - Reset affected user's password
+  - Monitor for recurrence 
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Prepared By: 
+Tier 1 SOC Analyst: Braulio Garcia
+
   
 
