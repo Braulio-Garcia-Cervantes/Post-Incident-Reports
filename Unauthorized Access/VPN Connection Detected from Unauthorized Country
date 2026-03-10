@@ -28,7 +28,7 @@ Time (PST)        Event
 3. Technical Analysis
 
   Confirmed IOC's:
-  - Source address: 113.161.158.12 != the targeted host's IP address, indicating source address was external and spoofing the target hostname
+  - Source address: 113.161.158.12 did not match the legitimate IP associated with the user account, indicating source address was external.
   - Time of incident was 02:04 AM (PST), outside of regualar business hours
   - Threat intel analysis revealed that the source IP had been associated with brute force attacks before 
   - Multiple OTP authentication attempts in the span of a couple minutes, indicitive of brute force attempt 
