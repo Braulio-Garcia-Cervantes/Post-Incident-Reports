@@ -35,7 +35,7 @@ Time (PST)        Event
   - Port probing detected 
 
   Assesment: 
-  The source IP had behavior consistent with that of recon. Many attempted connections were made to a variety of different destination ports, indicating port probing took place.
+  The source IP had behavior consistent with that of recon. Multiple connection attempts were observed targeting different destination ports on the VPN gateway, consistent with port probing behavior.
   There were many authentication attempts from the source IP, but no signs of successful compromise or persistence were detected. 
 
 
