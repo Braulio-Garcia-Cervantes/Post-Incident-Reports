@@ -17,10 +17,12 @@ Attack Technique: Password Brute-force Attempt
 
 2. Timeline
 
-  Time (PST)        Event
-  02:04 AM          Failed OTP Attempt #1
-  02:05 AM          Failed OTP Attempt #2
-  02:06 AM          Failed OTP Attempt #3
+Time (PST)        Event
+01:50 AM          Initial connection attempts to VPN gateway detected
+01:56 AM          Multiple port probing attempts observed from source IP
+02:01 AM          POST request to VPN login page detected
+02:04 AM          SIEM alert triggered for VPN connection from unauthorized country
+02:04–02:06 AM    Multiple failed OTP authentication attempts recorded
 
 
 3. Technical Analysis
