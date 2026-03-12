@@ -11,4 +11,28 @@ Attack Technique: Social Engineering
 
 1. Executive Summary
 
+  On February 26, at 03:40AM (PST), a SIEM alert was triggered involving a successfully delivered phishing email to internal user dylan@letsdefend.io, 
+  IP 172.16.17.216, promoting a free Windows update. The sender's domain (windows-update.site) tied to IP 132.232.40.201, was unfamiliar to any known legitimate Windows domain.
+  After analysis of the sender's domain on VirusTotal, Lumma Stealer infostealer malware was confirmed as the payload. Log analysis confirmed an outbound connection 
+  made from 172.16.17.216 (Dylan) to 132.232.40.201 (windows-update.site) 14 hours after the phishing email was recieved, confirming the payload was interacted with by our internal user. Immediate containment of 
+  the affected endpoint was employed. Further log analysis confirmed no other internal user recieved or interacted with the malicious payload. Due to the unauthorized
+  access of an internal endpoint, escalation to Tier 2 was rendered necessary for further imapct assessment. 
+
+
+2. Timeline of Events 
+
+  Time (PST)           Event
+  03:40              SIEM alert triggered 
+  03:42              Phishing email inspected 
+  03:44              VirusTotal analysis of payload
+  03:47              Log analysis discovered outbound connection from internal host back to sender 
+  03:48              More log analysis confirmed no other affected users
+  03:49              Affected endpoint isolated 
+  03:50              Escalation to Tier 2
+
+
+3. Detailed Findings 
+
+  Confirmed IOCs:
+  - 
   
