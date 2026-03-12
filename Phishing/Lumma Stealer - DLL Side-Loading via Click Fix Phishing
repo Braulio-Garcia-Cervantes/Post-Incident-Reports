@@ -56,7 +56,7 @@ Attack Technique: Social Engineering
 
   Immediate: 
 
-  - full session invalidation and credential reset across all corporate accounts
+  - Full session invalidation and credential reset across all corporate accounts
   - Block the identified malicious source IP 
   - Monitor network for any further connections to 132.232.40.201
 
