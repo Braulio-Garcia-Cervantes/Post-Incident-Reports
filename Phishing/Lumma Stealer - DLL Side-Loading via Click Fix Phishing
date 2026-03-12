@@ -35,7 +35,7 @@ Attack Technique: Social Engineering
 
   Confirmed IOCs:
   - Unfamiliar Windows domain update@windows-update.site with external IP 132.232.40.201 
-  - Sandbox detonation of payload confirmed Lumma Stealer malware 
+  - VirusTotal analysis of payload confirmed Lumma Stealer malware 
   - Outbound connection from internal target back to windows-update.site indicating interaction with the malware 
 
   Assessment:
