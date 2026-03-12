@@ -35,5 +35,34 @@ Attack Technique: Social Engineering
 
   Confirmed IOCs:
   - Unfamiliar Windows domain update@windows-update.site with external IP 132.232.40.201 
-  - 
+  - Sandbox detonation of payload confirmed Lumma Stealer malware 
+  - Outbound connection from internal target back to windows-update.site indicating interaction with the malware 
+
+  Assessment:
+
+  The event was classified a successful phishing attack, causing malware execution. Log investigation confirmed internal target was the only affected user, endpoint was isolated, 
+  however given Lumma Stealer's known capability to exfiltrate browser credentials and session cookies, full session invalidation and credential reset across all corporate accounts is strongly recommended.
+
+
+4. Impact Assessment
+
+  Confidentiality: Compromised - access to an internal user's credentials were gained and potential lateral movement or privilege escalation could have been made
+  Integrity: Compromised - with successful access to an internal user, the user's data or session could be tampered with
+  Availibility: Potential impact - pending further investigation
+  Risk: Critical - attacker gained access, likely able to maintain persistence 
+
+
+5. Recommended Actions
+
+Immediate: 
+
+- full session invalidation and credential reset across all corporate accounts
+- Block the identified malicious source IP 
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Prepared By: 
+Tier 1 SOC Analyst: Braulio Garcia
+
   
