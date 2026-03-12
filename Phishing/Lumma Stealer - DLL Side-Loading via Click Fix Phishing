@@ -34,5 +34,6 @@ Attack Technique: Social Engineering
 3. Detailed Findings 
 
   Confirmed IOCs:
+  - Unfamiliar Windows domain update@windows-update.site with external IP 132.232.40.201 
   - 
   
