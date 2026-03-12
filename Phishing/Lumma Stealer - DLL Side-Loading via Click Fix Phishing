@@ -54,10 +54,11 @@ Attack Technique: Social Engineering
 
 5. Recommended Actions
 
-Immediate: 
+  Immediate: 
 
-- full session invalidation and credential reset across all corporate accounts
-- Block the identified malicious source IP 
+  - full session invalidation and credential reset across all corporate accounts
+  - Block the identified malicious source IP 
+  - Monitor network for any further connections to 132.232.40.201
 
 
 ----------------------------------------------------------------------------------------------------------------------------------
