@@ -25,7 +25,7 @@ Attack Technique: Exploitation for Privilege Escalation
   03:40              SIEM alert triggered 
   03:41              Endpoint analysis of internal IP 172.16.15.78 found a suspicious filename in the process path ‘creditcard’ 
   03:43              VirusTotal analysis of file hash confirmed association with known exploit CVE-2017-16995
-  03:45              Lack of additional logs from the date of the event brought investigation to a halt
+  03:45              Log Management and browser history search returned no relevant activity on the incident date, consistent with possible evidence deletion
   03:48              Affected endpoint isolated 
   03:49              Escalation to Tier 2
 
