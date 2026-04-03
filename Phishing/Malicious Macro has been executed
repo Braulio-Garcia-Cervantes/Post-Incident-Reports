@@ -1,0 +1,79 @@
+---SECURITY INCIDENT REPORT---
+
+Incident ID: 231
+Reported By: Braulio Garcia - Tier 1 SOC Analyst
+Date: February 28, 2024
+Time Detected: 08:42 AM
+Severity: Critical
+Status: Escalated to Tier 2
+Attack Technique: Phishing / Malicious Macro Execution
+
+
+1. Executive Summary
+
+ On February 28, 2024, at 08:42 AM, a SIEM alert was triggered for a malicious macro execution on internal host 172.16.17.198 (Jayne)
+ Earlier at 08:12 AM, Jayne received a phishing email from jake.admin@cybercommunity.info containing a malicious macro-enabled attachment, edit1-invoice.docm
+ A VirusTotal lookup confirmed the file hash (1a819d18c9a9de4f81829c4cd55a17f767443c22f9b30ca953866827e5d96fb0) as malicious
+ Network logs confirmed that powershell.exe initiated an automated GET request to HTTP://WWW.GREYHATHACKER.NET/TOOLS/MESSBOX.EXE (IP: 92.204.221.16), indicating the macro successfully spawned a scripted process to retrieve a payload
+ Although the firewall permitted the connection, the server returned an HTTP 404 response, suggesting the download may have failed
+ Alarmingly, while the AV/EDR flagged the activity as "Detected," the EDR logs for the host are completely blank, potentially indicating defense evasion through log clearing
+ Jayne was identified as the only affected user, her device has been isolated, and the case is escalated to Tier 2
+
+
+2. Timeline of Events
+
+Time          Event
+08:12 AM      Phishing email delivered to Jayne with 'edit1-invoice.docm' attachment
+08:38 AM      Outbound connection from Jayne to 23.72.20.126 observed (potential pre-execution callback)
+08:42 AM      SIEM alert triggered; powershell.exe makes GET request for MESSBOX.EXE
+Triage        VirusTotal confirms file hash as malicious; network analysis confirms 404 response
+Remediation   Affected endpoint (172.16.17.198) isolated
+Escalation    Incident escalated to Tier 2 due to blank EDR logs and confirmed macro execution
+
+
+3. Detailed Findings
+
+Confirmed IOCs:
+
+File Name: edit1-invoice.docm
+SHA-256 Hash: 1a819d18c9a9de4f81829c4cd55a17f767443c22f9b30ca953866827e5d96fb0
+Malicious Domain/IP: www.greyhathacker.net / 92.204.221.16
+Suspicious Connection: 23.72.20.126 (Pre-alert activity)
+Process: powershell.exe (Scripted execution)
+
+Assessment: 
+
+ This incident is classified as a True Positive involving a successful macro-enabled phishing attack.
+ The attacker utilized an automated PowerShell script to attempt a secondary payload download.
+ The presence of blank EDR logs despite a confirmed detection is a significant finding that suggests the attacker may have successfully performed anti-forensic measures or log clearing.
+ Further forensic analysis and recovery from Tier 2 pending. 
+
+
+4. Impact Assessment
+
+Confidentiality: Potential Impact – The nature of the MESSBOX.EXE payload and the purpose of the 08:38 AM connection remain unknown
+
+Integrity: Compromised – A malicious macro successfully executed on the endpoint, spawning unauthorized PowerShell processes
+
+Availability: Potential Impact – The host has been isolated to prevent further compromise, impacting its availability
+
+Risk: Critical – Successful execution of a malicious macro combined with evidence of potential log tampering poses a severe risk to the environment
+
+
+5. Recommended Actions
+
+Immediate:
+
+- Perform forensic analysis of the endpoint to investigate why EDR logs are blank and check for signs of log deletion
+
+- Investigate the destination and purpose of the 08:38 AM connection to 23.72.20.126
+
+- Reset all credentials and active sessions for user Jayne
+
+- Blacklist the domain greyhathacker.net and the IP 92.204.221.16 at the organizational firewall
+
+- Review mail gateway logs to identify if other users received similar emails from jake.admin@cybercommunity.info
+
+
+--------------------------------------------------------------------------------
+Prepared By: Tier 1 SOC Analyst: Braulio Garcia
